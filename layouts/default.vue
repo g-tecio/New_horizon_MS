@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <navbar></navbar>
+    <banner></banner>
      <v-container>
         <nuxt />
       </v-container>
@@ -7,21 +9,17 @@
 </template>
 
 <script>
+import navbar from '~/components/header/navbar.vue'
+import banner from '~/components/header/banner.vue' 
+  
   export default {
     data() {
       return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
       }
+    },
+    components:{
+      navbar,
+      banner
     }
   }
 </script>
