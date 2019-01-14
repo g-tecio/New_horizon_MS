@@ -5,6 +5,7 @@
 ## Build Setup
 
 ``` bash
+# npm start cross-env NODE_ENV=production node server/index.js
 # install dependencies
 $ yarn install
 
