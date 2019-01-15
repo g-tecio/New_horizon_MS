@@ -29,6 +29,7 @@
 							>
 							</v-checkbox>
 							<v-btn block
+								to="/event-list"
 								type="submit"
 								color="success"
 							>
@@ -43,18 +44,16 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
 
 export default {
 	layout: 'login',
-	components: {
-		Logo,
-		VuetifyLogo
-	},
-	options: {
-		isLoggingIn: true,
-		shouldStayLoggedIn: true
+	data() {
+		return{
+			options: {
+				isLoggingIn: true,
+				shouldStayLoggedIn: true
+			}
+		}
 	}
 }
 </script>
