@@ -1,47 +1,40 @@
 <template>
-    <div>
-        <v-toolbar
-        id="core-toolbar"
-        height="50px"
-        flat
-        prominent
-        style="background: #fff;"
-        >
-            <v-layout>
-                <v-flex md1>            
-                    <v-toolbar-title class="tertiary--text font-weight-light">
-                    LOGO
-                    </v-toolbar-title>
-                </v-flex>
-                <v-flex md11>
-                    <v-toolbar-items>
-                        <v-layout>
-                        <div v-for="item in toolbar_options" :key="item">
-                                <v-btn :color="item.color" flat>
-                                    <v-icon >{{item.icon}}</v-icon>
-                                    &nbsp
-                                    {{item.title}}
-                                </v-btn>
-                            </div>
-                        </v-layout>
-                        <v-spacer></v-spacer>
-                        <v-layout align-center justify-end row fill-height>
-                            <v-flex md7>
-                                <v-layout>
-                                    <v-flex>
-                                        <v-btn flat> Sign out</v-btn>
-                                    </v-flex>     
-                                    <v-flex>
-                                        <h4>Cesar Miguel SH</h4>
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
-                        </v-layout>
-                    </v-toolbar-items>
-                </v-flex>
-            </v-layout>
-        </v-toolbar>
-   </div>
+    <v-toolbar>
+        <v-toolbar-title>New Horizon</v-toolbar-title>
+        <v-toolbar-items class="hidden-sm-and-down">
+            <v-btn
+            v-for="item in toolbar_options"
+            :key="item.icon"
+            :to="item.link"
+            flat
+            ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
+        </v-toolbar-items>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+            <v-btn
+            v-for="item in toolbar_user"
+            :key="item.icon"
+            flat
+            ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
+        </v-toolbar-items>
+        <v-toolbar-items class="hidden-md-and-up">
+            <v-btn
+            v-for="item in toolbar_user"
+            :key="item.icon"
+            flat
+            ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
+        </v-toolbar-items>
+        <v-menu class="hidden-md-and-up">
+            <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
+                <v-list>
+                <v-list-tile v-for="item in toolbar_options" :key="item.icon">
+                    <v-list-tile-content>
+                    <v-list-tile-title><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>     
+                </v-list>
+        </v-menu>
+    </v-toolbar>
 </template>
 
 <script>
@@ -69,6 +62,10 @@ export default {
                 {icon:'local_offer',title:'Inventory', paht:'', color:'blue darken-2'},
                 {icon:'shopping_cart',title:'Customers', paht:'', color:'orange darken-2'},
                 {icon:'group',title:'Bidding', paht:'', color:'purple darken-2'}
+            ],
+            toolbar_user: [
+                {icon: 'exit_to_app', title: 'Sign Out'},
+                {icon: 'person', title: 'Username'}
             ]
         }
     }  

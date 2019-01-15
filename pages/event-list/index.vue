@@ -59,6 +59,25 @@
                         </v-alert>
                     </v-data-table>
                 </v-card>
+                    <div class="text-xs-center">
+                        <v-btn
+                            to="/new-event"
+                            class="btn-style"
+                            color="success"
+                        >
+                            Create Event
+                            <v-icon right dark>add</v-icon>
+                        </v-btn>
+
+                        <v-btn
+                            class="btn-style"
+                            color="error"
+                        >
+                            Delete Event
+                            <v-icon right dark>delete</v-icon>
+                        </v-btn>
+
+                    </div>
             </v-flex>
         </v-layout>
     </v-container>
