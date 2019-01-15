@@ -2,7 +2,7 @@
     <div>
         <v-toolbar
         id="core-toolbar"
-        height="40px"
+        height="50px"
         flat
         prominent
         style="background: #fff;"

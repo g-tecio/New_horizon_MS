@@ -5,12 +5,14 @@
      <v-container>
         <nuxt />
       </v-container>
+    <c-footer></c-footer>
   </v-app>
 </template>
 
 <script>
 import navbar from '~/components/header/navbar.vue'
 import banner from '~/components/header/banner.vue' 
+import footer from '~/components/footer/footer.vue'
   
   export default {
     data() {
@@ -19,7 +21,8 @@ import banner from '~/components/header/banner.vue'
     },
     components:{
       navbar,
-      banner
+      banner,
+      'c-footer': footer
     }
-  }
+  } 
 </script>
