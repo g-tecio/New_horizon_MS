@@ -1,6 +1,6 @@
 <template>
   <v-app>
-     <v-container>
+      <v-container>
         <nuxt />
       </v-container>
     <c-footer></c-footer>

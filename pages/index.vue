@@ -51,6 +51,10 @@ export default {
 	components: {
 		Logo,
 		VuetifyLogo
+	},
+	options: {
+		isLoggingIn: true,
+		shouldStayLoggedIn: true
 	}
 }
 </script>
