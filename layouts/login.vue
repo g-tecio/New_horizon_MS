@@ -1,16 +1,15 @@
 <template>
   <v-app>
-    <navbarout></navbarout>
-    <banner></banner>
      <v-container>
         <nuxt />
       </v-container>
+    <c-footer></c-footer>
   </v-app>
 </template>
 
 <script>
-import navbarout from '~/components/header/navbarout.vue'
-import banner from '~/components/header/banner.vue' 
+import footer from '~/components/footer/footer.vue'
+
   export default {
     data() {
       return {
@@ -18,8 +17,7 @@ import banner from '~/components/header/banner.vue'
       }
     },
     components:{
-      navbarout,
-      banner
+      'c-footer': footer
     }
   }
 </script>
