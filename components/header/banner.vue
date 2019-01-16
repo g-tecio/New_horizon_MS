@@ -1,7 +1,8 @@
 <template>
-    <v-img 
+    <v-img
+        class="banner_img"
         src="https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-2.32103624.jpg"
-        max-height="250px"
+        max-height="300px"
         max-widht="100%"
         :aspect-ratio="3"
         position="center"
@@ -17,6 +18,11 @@ export default {
 </script>
 
 <style>
+
+    .banner_img{
+        margin-top: 55px;
+        height: 300;
+    }
     .event_label{
     border-bottom: 1px solid white;
     color: white;

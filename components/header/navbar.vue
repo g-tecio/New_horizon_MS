@@ -1,11 +1,10 @@
 <template>
-    <v-toolbar>
+    <v-toolbar class="style_toolbar">
         <v-toolbar-title>New Horizon</v-toolbar-title>
         <v-toolbar-items class="hidden-sm-and-down">
             <v-btn
             v-for="item in toolbar_options"
             :key="item.icon"
-            :to="item.link"
             flat
             ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
         </v-toolbar-items>
@@ -21,13 +20,14 @@
             <v-btn
             v-for="item in toolbar_user"
             :key="item.icon"
+            :to="item.link"
             flat
             ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
         </v-toolbar-items>
         <v-menu class="hidden-md-and-up">
             <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
                 <v-list>
-                <v-list-tile v-for="item in toolbar_options" :key="item.icon">
+                <v-list-tile v-for="item in toolbar_options" :key="item.icon" :to="item.link">
                     <v-list-tile-content>
                     <v-list-tile-title><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-tile-title>
                     </v-list-tile-content>
@@ -58,10 +58,10 @@ export default {
             responsive: false,
             responsiveInput: false,
             toolbar_options:[
-                {icon:'move_to_inbox',title:'Events', paht:'', color:'green darken-2'},
-                {icon:'local_offer',title:'Inventory', paht:'', color:'blue darken-2'},
-                {icon:'shopping_cart',title:'Customers', paht:'', color:'orange darken-2'},
-                {icon:'group',title:'Bidding', paht:'', color:'purple darken-2'}
+                {icon:'move_to_inbox',title:'Events', paht:'', color:'green darken-2', link: '/event-list'},
+                {icon:'local_offer',title:'Inventory', paht:'', color:'blue darken-2', link: '/event-list'},
+                {icon:'group',title:'Customers', paht:'', color:'orange darken-2', link: '/event-list'},
+                {icon:'shopping_cart',title:'Bidding', paht:'', color:'purple darken-2', link: '/event-list'}
             ],
             toolbar_user: [
                 {icon: 'exit_to_app', title: 'Sign Out'},
@@ -73,4 +73,8 @@ export default {
 </script>
 
 <style>
+    .style_toolbar{
+        position: fixed;
+        z-index: 1000;
+    }
 </style>

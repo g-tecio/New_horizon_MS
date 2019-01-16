@@ -128,12 +128,12 @@ export default {
     ],
     items: [
       {
-        event_name: "Event",
+        event_name: "Loading...",
         address: {
-          city: "dgo"
+          city: "Loading..."
         },
-        date: "none",
-        status: "active"
+        date: "",
+        status: "Loading..."
       }
     ]
   }),
