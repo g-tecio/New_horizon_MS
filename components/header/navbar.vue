@@ -1,10 +1,11 @@
 <template>
     <v-toolbar class="style_toolbar">
         <v-toolbar-title>New Horizon</v-toolbar-title>
-        <v-toolbar-items class="hidden-sm-and-down">
+        <v-toolbar-items class="hidden-sm-and-down" id="items_left">
             <v-btn
             v-for="item in toolbar_options"
-            :key="item.icon"
+            :key="item"
+            :to="item.path"
             flat
             ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
         </v-toolbar-items>
@@ -13,6 +14,7 @@
             <v-btn
             v-for="item in toolbar_user"
             :key="item.icon"
+            :to="item.path"
             flat
             ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
         </v-toolbar-items>
@@ -20,14 +22,14 @@
             <v-btn
             v-for="item in toolbar_user"
             :key="item.icon"
-            :to="item.link"
+            :to="item.path"
             flat
             ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
         </v-toolbar-items>
         <v-menu class="hidden-md-and-up">
             <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
                 <v-list>
-                <v-list-tile v-for="item in toolbar_options" :key="item.icon" :to="item.link">
+                <v-list-tile v-for="item in toolbar_options" :key="item.icon" :to="item.path">
                     <v-list-tile-content>
                     <v-list-tile-title><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-tile-title>
                     </v-list-tile-content>
@@ -58,13 +60,13 @@ export default {
             responsive: false,
             responsiveInput: false,
             toolbar_options:[
-                {icon:'move_to_inbox',title:'Events', paht:'', color:'green darken-2', link: '/event-list'},
-                {icon:'local_offer',title:'Inventory', paht:'', color:'blue darken-2', link: '/event-list'},
-                {icon:'group',title:'Customers', paht:'', color:'orange darken-2', link: '/event-list'},
-                {icon:'shopping_cart',title:'Bidding', paht:'', color:'purple darken-2', link: '/event-list'}
+                {icon:'move_to_inbox',title:'Events', path:'/event-list' },
+                {icon:'local_offer',title:'Inventory', path:'/event'},
+                {icon:'group',title:'Customers', path:'/event-l', },
+                {icon:'shopping_cart',title:'Bidding', path:'/evt', }
             ],
             toolbar_user: [
-                {icon: 'exit_to_app', title: 'Sign Out'},
+                {icon: 'exit_to_app', title: 'Sign Out', path:'/'},
                 {icon: 'person', title: 'Username'}
             ]
         }
@@ -76,5 +78,9 @@ export default {
     .style_toolbar{
         position: fixed;
         z-index: 1000;
+    }
+
+    #items_left{
+        padding-left: 20px;
     }
 </style>

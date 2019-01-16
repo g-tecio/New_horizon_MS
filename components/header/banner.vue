@@ -20,18 +20,18 @@ export default {
 <style>
 
     .banner_img{
-        margin-top: 55px;
+        margin-top: 49px;
         height: 300;
     }
     .event_label{
-    border-bottom: 1px solid white;
-    color: white;
-    margin-left: 10px;
-    width: 40%;
-    bottom: 10px;
-    position: absolute;
-    text-decoration: none;
-    font-size: 45px;
+        border-bottom: 1px solid white;
+        color: white;
+        margin-left: 10px;
+        width: 40%;
+        bottom: 10px;
+        position: absolute;
+        text-decoration: none;
+        font-size: 45px;
   }
 
 </style>
