@@ -145,6 +145,7 @@
                                         class="mx-0 font-weight-light"
                                         color="success"
                                         @click="submitData()"
+                                        
                                     >Save Event</v-btn>
                                 </v-flex>
                             </v-layout>
@@ -157,6 +158,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data() {
         return {
@@ -206,8 +209,9 @@ export default {
     },
     methods: {
         submitData() {
-            this.$http.post(this.api_url, this.event).then(res => {
-                console.log(res);
+            axios({ method: "POST", url: this.api_url, headers: { "content-type": "application/json" }, data: this.event, body: JSON.stringify(this.event)}).then(()=>{
+                debugger
+                router.push('/event-list')
             });
         },
         onFileChange($event) {
@@ -219,10 +223,10 @@ export default {
         },
         getBase64(file) {
             return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => (this.event.event_image = reader.result);
-            reader.onerror = error => reject(error);
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => (this.event.event_image = reader.result);
+                reader.onerror = error => reject(error);
             });
         },
         getFormData(files) {
