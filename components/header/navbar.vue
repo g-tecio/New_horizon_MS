@@ -64,7 +64,7 @@ export default {
 <style>
     .style_toolbar{
         position: fixed;
-        z-index: 1000;
+        z-index: 1;
     }
 
     #items_left{

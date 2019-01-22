@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <drawer :config="config"/>
     <navbar :config="config"></navbar>
+    <drawer :config="config"/>
     <banner></banner>
      <v-container>
         <nuxt />

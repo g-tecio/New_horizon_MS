@@ -81,6 +81,7 @@ export default {
 <style>
     #drawer_style{
         z-index: 1000000;
+        position: fixed;
     }
 </style>
 
