@@ -10,7 +10,7 @@
         <v-list class="pa-1">
             <v-list-tile avatar>
                 <v-list-tile-content>
-                    <v-toolbar-title>New Horizon</v-toolbar-title>
+                    <v-toolbar-title>{{title}}</v-toolbar-title>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>
@@ -53,13 +53,6 @@ export default {
     props: ['config'],
     data(){
         return{
-            notifications: [
-                'Mike, John responded to your email',
-                'You have 5 new tasks',
-                'You\'re now a friend with Andrew',
-                'Another Notification',
-                'Another One'
-            ],
             title: 'New Horizon',
             responsive: false,
             responsiveInput: false,
@@ -70,8 +63,8 @@ export default {
                 {icon:'shopping_cart',title:'Bidding', path:'/evt', }
             ],
             toolbar_user: [
-                {icon: 'exit_to_app', title: 'Sign Out', path:'/'},
-                {icon: 'person', title: 'Username'}
+                {icon: 'person', title: 'Username'},
+                {icon: 'exit_to_app', title: 'Sign Out', path:'/'}
             ]
         }
     }

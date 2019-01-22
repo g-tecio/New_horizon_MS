@@ -6,7 +6,7 @@
                     <v-card-title>
                         <span class="headline">Event Details</span>
                     </v-card-title>
-                    <v-img :src="event.event_image" aspect-ratio="2"></v-img>
+                    <v-img :src="event.event_image" aspect-ratio="1.5"></v-img>
                     <v-form>
                         <v-container grid-list-xl text-xs-center>
                             <v-layout row wrap>

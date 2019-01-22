@@ -52,8 +52,8 @@ export default {
                 {icon:'shopping_cart',title:'Bidding', path:'/evt', }
             ],
             toolbar_user: [
-                {icon: 'exit_to_app', title: 'Sign Out', path:'/'},
-                {icon: 'person', title: 'Username'}
+                {icon: 'person', title: 'Username'},
+                {icon: 'exit_to_app', title: 'Sign Out', path:'/'}
             ]
         }
     },  
