@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <navbar></navbar>
+    <drawer :config="config"/>
+    <navbar :config="config"></navbar>
     <banner></banner>
      <v-container>
         <nuxt />
@@ -13,16 +14,20 @@
 import navbar from '~/components/header/navbar.vue'
 import banner from '~/components/header/banner.vue' 
 import footer from '~/components/footer/footer.vue'
-  
+import drawer from '~/components/header/drawer.vue'
   export default {
     data() {
       return {
+        config:{
+          drawer:false
+        }
       }
     },
     components:{
       navbar,
       banner,
-      'c-footer': footer
+      'c-footer': footer,
+      drawer
     }
   } 
 </script>

@@ -18,23 +18,8 @@
             flat
             ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
         </v-toolbar-items>
-        <v-toolbar-items class="hidden-md-and-up">
-            <v-btn
-            v-for="item in toolbar_user"
-            :key="item.icon"
-            :to="item.path"
-            flat
-            ><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-btn>
-        </v-toolbar-items>
         <v-menu class="hidden-md-and-up">
-            <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
-                <v-list>
-                <v-list-tile v-for="item in toolbar_options" :key="item.icon" :to="item.path">
-                    <v-list-tile-content>
-                    <v-list-tile-title><v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>     
-                </v-list>
+            <v-toolbar-side-icon slot="activator" @click="config.drawer = true"></v-toolbar-side-icon>
         </v-menu>
     </v-toolbar>
 </template>
@@ -47,6 +32,7 @@ import {
 } from 'vuex'
 
 export default {
+    props: ['config'],
     data(){
         return{
             notifications: [
@@ -70,7 +56,8 @@ export default {
                 {icon: 'person', title: 'Username'}
             ]
         }
-    }  
+    },  
+
 }
 </script>
 
