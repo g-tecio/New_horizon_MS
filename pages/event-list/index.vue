@@ -6,53 +6,58 @@
                     <v-card-title>
                     <h2>Events</h2>
                     <v-spacer></v-spacer>
-                    <v-text-field
-                        v-model="search"
-                        append-icon="search"
-                        label="Search"
-                        single-line
-                        hide-details
-                    ></v-text-field>
+                        <v-text-field
+                            v-model="search"
+                            append-icon="search"
+                            label="Search"
+                            single-line
+                            hide-details
+                        ></v-text-field>
                     </v-card-title>
                     <v-data-table
                         v-model="selected"
                         :headers="headers"
-                        :items="items"
-                        :search="search"
+                        :items="events_details"
                         :pagination.sync="pagination"
-                        item-key="name"
+                        :search="search"
+                        select-all
+                        item-key="event_name"
                         class="elevation-1"
                     >
-                        <template slot="headerCell" slot-scope="{ header }">
-                            <span
-                                class="subheading font-weight-light text-success text--darken-3"
-                                v-text="header.text"
-                            />
-                            <th
-                                v-for="header in header.headers"
-                                :key="header.text"
-                                :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
-                                @click="changeSort(header.value)"
-                                >
-                                <v-icon small>arrow_upward</v-icon>
-                                {{ header.text }}
-                            </th>
-                        </template>
-                        <template slot="items" slot-scope="{ item }">
-                            <tr :active="item.selected" @click="item.selected = !item.selected">
-                                <td>
+                        <template slot="headers" slot-scope="props">
+                        <tr>
+                            <th>
                                 <v-checkbox
-                                    :input-value="item.selected"
+                                    :input-value="props.all"
+                                    :indeterminate="props.indeterminate"
                                     primary
                                     hide-details
+                                    @click.stop="toggleAll"
                                 ></v-checkbox>
-                                </td>
-                                <td class="text-xs-left">{{ item.event_name }}</td>
-                                <td class="text-xs-left">{{ item.address.city }}</td>
-                                <td class="text-xs-left">{{ item.status }}</td>
-                                <td class="text-xs-left">{{ item.date.formated_date }}</td>
-                                <td class="text-xs-left"><v-btn flat :to="{ name: 'event-list-id' ,params:{ id : item.id }}"><v-icon>visibility</v-icon>  See details</v-btn></td>
-                            </tr>
+                            </th>
+                            <th
+                                v-for="header in props.headers"
+                                :key="header.text"
+                            >
+                                {{ header.text }}
+                            </th>
+                        </tr>
+                        </template>
+                        <template slot="items" slot-scope="props">
+                        <tr :active="props.selected">
+                            <td>
+                            <v-checkbox
+                                :input-value="props.selected"
+                                primary
+                                hide-details
+                            ></v-checkbox>
+                            </td>
+                            <td class="text-xs-center">{{ props.item.event_name }}</td>
+                            <td class="text-xs-center">{{ props.item.address.city }}</td>
+                            <td class="text-xs-center">{{ props.item.status }}</td>
+                            <td class="text-xs-center">{{ props.item.date.formated_date }}</td>
+                            <td class="text-xs-center"><v-btn flat :to="{ name: 'event-list-id' ,params:{ id : props.item.id }}"><v-icon>visibility</v-icon>  See details</v-btn></td>
+                        </tr>
                         </template>
                         <v-alert slot="no-results" :value="true" color="error" icon="warning">
                             Your search for "{{ search }}" found no results.
@@ -72,6 +77,7 @@
                         <v-btn
                             class="btn-style"
                             color="error"
+                            
                         >
                             Delete Event
                             <v-icon right dark>delete</v-icon>
@@ -87,84 +93,84 @@
 import axios from "axios";
 
 export default {
-  data: () => ({
-    api_url:
-      "https://ox8usqk4cd.execute-api.us-east-2.amazonaws.com/hackathon/events",
-    selected: [],
-    search: '',
-    pagination: {
-        sortBy: 'name'
-    },
-    headers: [
-        {
-            sortable: false,
-            text: "Edit",
+    data: () => ({
+        api_url:
+        "https://ox8usqk4cd.execute-api.us-east-2.amazonaws.com/hackathon/events",
+        selected: [],
+        search: '',
+        pagination: {
+            sortBy: 'name'
         },
-        {
-            sortable: false,
-            text: "Event Name",
-            value: "event_name"
+        headers: [
+            {
+                text: "Event Name",
+                value: "event_name"
+            },
+            {
+                sortable: false,
+                text: "City",
+                value: "address.city",
+                align: 'right'
+            },
+            {
+                sortable: true,
+                text: "Status",
+                value: "status"
+            },
+            {
+                sortable: true,
+                text: "Date",
+                value: "date"
+            },
+            {
+                sortable: false,
+                text: "See details",
+                value: "status",
+                align: 'right'
+            }
+        ],
+        events_details: [
+            {
+                event_name: "Loading...",
+                address: {
+                city: "Loading..."
+                },
+                date: "",
+                status: "Loading..."
+            }
+        ]
+    }),
+    methods: {
+        toggleAll () {
+            if (this.selected.length) this.selected = []
+            else this.selected = this.events_details.slice()
         },
-        {
-            sortable: false,
-            text: "City",
-            value: "address.city"
-        },
-        {
-            sortable: true,
-            text: "Status",
-            value: "status"
-        },
-        {
-            sortable: true,
-            text: "Date",
-            value: "date"
-        },
-        {
-            sortable: false,
-            text: "See details",
-            value: "status"
+        changeSort (column) {
+            if (this.pagination.sortBy === column) {
+                this.pagination.descending = !this.pagination.descending
+            } else {
+                this.pagination.sortBy = column
+                this.pagination.descending = false
+            }
         }
-    ],
-    items: [
-      {
-        event_name: "Loading...",
-        address: {
-          city: "Loading..."
-        },
-        date: "",
-        status: "Loading..."
-      }
-    ]
-  }),
-  components:{
-  },
-  methods:{
-    changename(){
-      this.$store.commit('set_name','mike')
-    }
-  },
+    },
     mounted() {
         axios({ method: "GET", url: this.api_url, headers: { "content-type": "application/json" } }).then(
             result => {
-                this.items = result.data
+                this.events_details = result.data
             },
             error => {
                 console.error(error);
             }
         );
     },
-    toggleAll () {
-        if (this.selected.length) this.selected = []
-        else this.selected = this.items.slice()
-    },
-    changeSort (column) {
-        if (this.pagination.sortBy === column) {
-          this.pagination.descending = !this.pagination.descending
-        } else {
-          this.pagination.sortBy = column
-          this.pagination.descending = false
-        }
-    }
 };
 </script>
+
+<style> 
+
+    td{
+        padding: 0 30px;
+    }
+    
+</style>

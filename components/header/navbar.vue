@@ -35,13 +35,6 @@ export default {
     props: ['config'],
     data(){
         return{
-            notifications: [
-                'Mike, John responded to your email',
-                'You have 5 new tasks',
-                'You\'re now a friend with Andrew',
-                'Another Notification',
-                'Another One'
-            ],
             title: 'New Horizon',
             responsive: false,
             responsiveInput: false,
