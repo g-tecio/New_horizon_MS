@@ -221,8 +221,7 @@ export default {
     methods: {
         submitData() {
             axios({ method: "POST", url: this.api_url, headers: { "content-type": "application/json" }, data: this.event, body: JSON.stringify(this.event)}).then(()=>{
-                debugger
-                router.push('/event-list')
+                this.$router.push('/event-list')
             });
         },
         onFileChange($event) {

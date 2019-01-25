@@ -45,7 +45,7 @@
                         </tr>
                         </template>
                         <template slot="items" slot-scope="props">
-                        <tr :active="props.selected" @click="props.selected = props.indeterminate = true && !props.selected">
+                        <tr :active="props.selected" @click="props.selected = props.indeterminate = true && !props.selected" v-on="activeBtn = 'isDisabled'">
                             <td>
                             <v-checkbox
                                 :input-value="props.selected"
