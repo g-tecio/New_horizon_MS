@@ -32,6 +32,7 @@
                                     :indeterminate="props.indeterminate"
                                     primary
                                     hide-details
+                                    @click.exact="activeBtn = 'isDisabled'"
                                     @click.stop="toggleAll"
                                 ></v-checkbox>
                             </th>
@@ -44,10 +45,11 @@
                         </tr>
                         </template>
                         <template slot="items" slot-scope="props">
-                        <tr :active="props.selected">
+                        <tr :active="props.selected" @click="props.selected = props.indeterminate = true && !props.selected">
                             <td>
                             <v-checkbox
                                 :input-value="props.selected"
+                                @click="activeBtn = 'isDisabled'"
                                 primary
                                 hide-details
                             ></v-checkbox>
@@ -73,16 +75,27 @@
                             Create Event
                             <v-icon right dark>add</v-icon>
                         </v-btn>
-
-                        <v-btn
-                            class="btn-style"
-                            color="error"
-                            
-                        >
-                            Delete Event
-                            <v-icon right dark>delete</v-icon>
-                        </v-btn>
-
+                        
+                        <v-dialog v-model="dialog" persistent max-width="450">
+                            <v-btn
+                                slot="activator"
+                                class="btn-style"
+                                color="error"
+                                :disabled="isDisabled"
+                            >
+                                Delete Event
+                                <v-icon right dark>delete</v-icon>
+                            </v-btn>
+                            <v-card>
+                                <v-card-title class="headline">Are you sure?</v-card-title>
+                                <v-card-text>Do you want to delete this event?</v-card-text>
+                                <v-card-actions>
+                                <v-spacer></v-spacer>
+                                    <v-btn flat @click="dialog = false">Decline</v-btn>
+                                    <v-btn color="error" flat @click="dialog = false">Accept</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
                     </div>
             </v-flex>
         </v-layout>
@@ -93,9 +106,12 @@
 import axios from "axios";
 
 export default {
-    data: () => ({
-        api_url:
-        "https://ox8usqk4cd.execute-api.us-east-2.amazonaws.com/hackathon/events",
+    data(){
+     return { 
+        activeBtn: null,
+        api_url:"https://ox8usqk4cd.execute-api.us-east-2.amazonaws.com/hackathon/events",
+        isDisabled: true,
+        dialog: false,
         selected: [],
         search: '',
         pagination: {
@@ -139,11 +155,11 @@ export default {
                 status: "Loading..."
             }
         ]
-    }),
+    }},
     methods: {
         toggleAll () {
             if (this.selected.length) this.selected = []
-            else this.selected = this.events_details.slice()
+            else this.selected = this.events_details.slice() 
         },
         changeSort (column) {
             if (this.pagination.sortBy === column) {
@@ -151,6 +167,19 @@ export default {
             } else {
                 this.pagination.sortBy = column
                 this.pagination.descending = false
+            }
+        },
+        
+    },
+    watch:{
+        activeBtn(){
+            const l = this.activeBtn
+            if ( this.selected.length < 1){
+                this[l] = true
+                this.activeBtn = this.isDisabled
+            } else {
+                this[l] = false
+                this.activeBtn = null
             }
         }
     },
