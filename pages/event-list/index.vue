@@ -106,56 +106,62 @@
 import axios from "axios";
 
 export default {
-    data(){
-     return { 
-        activeBtn: null,
-        api_url:"https://ox8usqk4cd.execute-api.us-east-2.amazonaws.com/hackathon/events",
-        isDisabled: true,
-        dialog: false,
-        selected: [],
-        search: '',
-        pagination: {
-            sortBy: 'name'
-        },
-        headers: [
-            {
-                text: "Event Name",
-                value: "event_name"
+    head() {
+        return {
+            title: 'New Horizon - Events'
+        }
+    },
+    data() {
+        return { 
+            activeBtn: null,
+            api_url:"https://ox8usqk4cd.execute-api.us-east-2.amazonaws.com/hackathon/events",
+            isDisabled: true,
+            dialog: false,
+            selected: [],
+            search: '',
+            pagination: {
+                sortBy: 'name'
             },
-            {
-                sortable: false,
-                text: "City",
-                value: "address.city",
-                align: 'right'
-            },
-            {
-                sortable: true,
-                text: "Status",
-                value: "status"
-            },
-            {
-                sortable: true,
-                text: "Date",
-                value: "date"
-            },
-            {
-                sortable: false,
-                text: "See details",
-                value: "status",
-                align: 'right'
-            }
-        ],
-        events_details: [
-            {
-                event_name: "Loading...",
-                address: {
-                city: "Loading..."
+            headers: [
+                {
+                    text: "Event Name",
+                    value: "event_name"
                 },
-                date: "",
-                status: "Loading..."
-            }
-        ]
-    }},
+                {
+                    sortable: false,
+                    text: "City",
+                    value: "address.city",
+                    align: 'right'
+                },
+                {
+                    sortable: true,
+                    text: "Status",
+                    value: "status"
+                },
+                {
+                    sortable: true,
+                    text: "Date",
+                    value: "date"
+                },
+                {
+                    sortable: false,
+                    text: "See details",
+                    value: "status",
+                    align: 'right'
+                }
+            ],
+            events_details: [
+                {
+                    event_name: "Loading...",
+                    address: {
+                    city: "Loading..."
+                    },
+                    date: "",
+                    status: "Loading..."
+                }
+            ]
+        }   
+    },
     methods: {
         toggleAll () {
             if (this.selected.length) this.selected = []

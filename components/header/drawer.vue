@@ -58,9 +58,9 @@ export default {
             responsiveInput: false,
             toolbar_options:[
                 {icon:'move_to_inbox',title:'Events', path:'/event-list' },
-                {icon:'local_offer',title:'Inventory', path:'/event'},
-                {icon:'group',title:'Customers', path:'/event-l', },
-                {icon:'shopping_cart',title:'Bidding', path:'/evt', }
+                {icon:'local_offer',title:'Inventory'},
+                {icon:'group',title:'Customers'},
+                {icon:'shopping_cart',title:'Bidding'}
             ],
             toolbar_user: [
                 {icon: 'person', title: 'Username'},

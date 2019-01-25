@@ -161,6 +161,11 @@
 import axios from "axios";
 
 export default {
+    head() {
+        return {
+            title: 'New Horizon - New Event'
+        }
+    },
     data() {
         return {
         api_url: "https://ox8usqk4cd.execute-api.us-east-2.amazonaws.com/hackathon/events",

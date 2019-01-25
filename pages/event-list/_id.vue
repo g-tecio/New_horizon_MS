@@ -65,7 +65,7 @@
                                     <v-text-field disabled v-model="event.capacity" label="Capacity"/>
                                 </v-flex>
                                 <v-flex xs12 md6>
-                                    <v-select disabled v-model="event.status" label="Status"></v-select>
+                                    <v-text-field disabled v-model="event.status" label="Status"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12>
                                     <v-textarea disabled v-model="event.description" label="Description"/>
@@ -143,6 +143,11 @@
 import axios from 'axios'
 
 export default {
+    head() {
+        return {
+            title: 'New Horizon - Event Details'
+        }
+    },
     data() {
         return {
         id: 0,
