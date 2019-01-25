@@ -10,17 +10,25 @@
                         <v-container grid-list-xl text-xs-center>
                             <v-layout row wrap>
                                 <v-flex xs12 md6>
-                                    <v-text-field label="Event Name" v-model="event.event_name"/>
+                                    <v-text-field label="Event Name" v-model="event.event_name" :rules="[() => !!event.event_name || 'This field is required']"/>
                                 </v-flex>
                                 <v-flex xs12 md6>
-                                    <v-text-field label="Venue Name" v-model="event.venue_name"/>
+                                    <v-text-field label="Venue Name" v-model="event.venue_name" :rules="[() => !!event.venue_name || 'This field is required']"/>
                                 </v-flex>
                                 <!-- Addresss -->
                                 <v-flex xs12 md6>
-                                    <v-text-field v-model="event.address.line_address1" label="Line address 1"/>
+                                    <v-text-field v-model="event.address.line_address1" label="Line address 1" :rules="[
+                                        () => !!event.address.line_address1 || 'This field is required',
+                                        () => !!event.address.line_address1 && event.address.line_address1.length <= 25 || 'Address must be less than 25 characters',
+                                        addressCheck
+                                    ]"/>
                                 </v-flex>
                                 <v-flex xs12 md6>
-                                    <v-text-field v-model="event.address.line_address2" label="Line address 2"/>
+                                    <v-text-field v-model="event.address.line_address2" label="Line address 2" :rules="[
+                                        () => !!event.address.line_address2 || 'This field is required',
+                                        () => !!event.address.line_address2 && event.address.line_address2.length <= 25 || 'Address must be less than 25 characters',
+                                        addressCheck
+                                    ]"/>
                                 </v-flex>
                                 <v-flex xs12 md6>
                                     <v-text-field v-model="event.address.country" label="Country"/>
@@ -75,17 +83,14 @@
                                     <v-select v-model="event.date.time_zone" :items="time_zone" label="Time Zone"></v-select>
                                 </v-flex>
                                 <v-flex xs6 md3>
-                                    <v-menu
+                                    <v-dialog
                                         ref="menu"
-                                        :close-on-content-click="false"
                                         v-model="menu"
-                                        :nudge-right="40"
                                         :return-value.sync="date"
+                                        persistent
                                         lazy
-                                        transition="scale-transition"
-                                        offset-y
                                         full-width
-                                        min-width="290px"
+                                        width="290px"
                                     >
                                         <v-text-field
                                         slot="activator"
@@ -94,12 +99,12 @@
                                         append-icon="today"
                                         readonly
                                         ></v-text-field>
-                                        <v-date-picker v-model="event.date.formated_date" no-title scrollable>
+                                        <v-date-picker v-model="event.date.formated_date" scrollable>
                                         <v-spacer></v-spacer>
                                         <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
                                         <v-btn flat color="primary" @click="$refs.menu.save(event.date.formated_date)">OK</v-btn>
                                         </v-date-picker>
-                                    </v-menu>
+                                    </v-dialog>
                                 </v-flex>
                                 <v-flex xs6 md3>
                                     <v-dialog
@@ -208,7 +213,8 @@ export default {
         status: ["Pending", "Not started", "In progress", "Finished"],
         time_zone: ["Pacific", "Central", "Mountain", "Eastern"],
         reactive: true,
-        menu2: false,
+        menu: false,
+        modal: false,
         modal2: false,
         };
     },
