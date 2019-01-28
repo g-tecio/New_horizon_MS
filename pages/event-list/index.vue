@@ -76,7 +76,7 @@
                             <v-icon right dark>add</v-icon>
                         </v-btn>
                         
-                        <v-dialog v-model="dialog" persistent max-width="450">
+                        <v-dialog v-model="dialog" :disabled="isDisabled" persistent max-width="450">
                             <v-btn
                                 slot="activator"
                                 class="btn-style"
