@@ -10,7 +10,7 @@
 					<v-form>
 						<v-container>
 							<v-text-field
-								prepend-icon="person"
+								append-icon="person"
 								label="Name"
 								v-if="!options.isLoggingIn"
 								v-model="user.name"
@@ -18,21 +18,21 @@
 							>
 							</v-text-field>
 							<v-text-field
-								prepend-icon="email"
+								append-icon="email"
 								label="Email"
 								type="emial"
 								light
 							>
 							</v-text-field>
 							<v-text-field
-								prepend-icon="lock"
+								append-icon="lock"
 								label="Password"
 								type="password"
 								light
 							>
 							</v-text-field>
 							<v-text-field
-								prepend-icon="lock"
+								append-icon="lock"
 								label="Confirm Password"
 								type="password"
 								light
@@ -45,6 +45,14 @@
 								hide-details
 								class="logged_box"
 								v-if="options.isLoggingIn"
+							>
+							</v-checkbox>
+							<v-checkbox
+								light
+								label="I accept the terms and conditions"
+								hide-details
+								class="logged_box"
+								v-if="!options.isLoggingIn"
 							>
 							</v-checkbox>
 							<v-btn block
