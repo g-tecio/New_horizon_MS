@@ -31,11 +31,20 @@
 								light
 							>
 							</v-text-field>
+							<v-text-field
+								prepend-icon="lock"
+								label="Confirm Password"
+								type="password"
+								light
+								v-if="!options.isLoggingIn"
+							>
+							</v-text-field>
 							<v-checkbox
 								light
 								label="Stay logged in?"
 								hide-details
 								class="logged_box"
+								v-if="options.isLoggingIn"
 							>
 							</v-checkbox>
 							<v-btn block
@@ -58,6 +67,7 @@
 							<v-layout justify-center> 
 								<v-btn 
 									light
+									v-if="options.isLoggingIn"
 									@click="options.isLoggingIn = false"
 								>
 								Sign Up
@@ -97,7 +107,7 @@ export default {
 	}
 
 	.ifLog{
-		padding-top: 10px;
+		padding-top: 15px;
 		text-align: center;
 	}
 
